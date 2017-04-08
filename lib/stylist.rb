@@ -18,6 +18,14 @@ define_singleton_method(:all) do
   stylists
 end
 
+define_method(:==) do |another_stylist|
+  self.name().==(another_stylist.name()).&(self.id().==(another_stylist.id())) #basically saying if the input name and id is equal to another matching pair, they are the same.
+end
+
+define_method(:save) do #1. Everything pulled from DB is a string, so must be converted to int.
+  result = DB.exec("INSERT INTO stylist (name) VALUES ('#{@name}') RETURNING id;") #2. We can insert with a name and have the DB assign/return a serial id.
+  @id = result.first().fetch("id").to_i() #3. pg gem returns info in an array, so we can get an id by using the first() method to take out of array and use fetch() to select id.
+end
 
 
 
