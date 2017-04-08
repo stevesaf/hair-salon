@@ -1,0 +1,22 @@
+<h3 style="text-align: center">Here are our Hair EXPERTS:</h3>
+
+  <% if @stylists.any? %>
+
+    <ol style="text-aline: center">
+        <% @stylists.each do |stylist| %>
+            <div class="row text-center">
+                <li style="font-size: 20px">
+                  <a href="/stylists/<%= stylist.id() %>"><%= stylist.name %></a>
+                </li>
+
+                <form style="display: inline-block" action="/deletes/<%= stylist.id() %>">
+                    <button class="btn btn-danger btn-cons center-block">
+                        delete
+                    </button>
+                </form>
+            </div>
+        <% end %>
+    <ol>
+  <%else%>
+    <p>There are no Stylists yet!</p>
+  <%end%>

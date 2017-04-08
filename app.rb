@@ -12,15 +12,24 @@ get("/") do
   erb(:index)
 end
 
-get("/stylists/new") do
+get("/new_stylist") do
   erb(:stylist_form)
 end
 
 post("/stylists") do
-  stylist = params.fetch('name') #Get new stylists name the boss enters from the parameters.
-  Stylist.new({:name => name, :id => nil}).save() #Create a new stylist object using this name. id will remain nil until assigned by database.
+  name = params.fetch("name") #Get new stylists name the boss enters from the parameters.
+  stylist= Stylist.new({:name => name, :id => nil}) #Create a new stylist object using this name. id will remain nil until assigned by database.
   stylist.save()
   erb(:stylist_success)
+end
+
+post("/clients") do
+  name = params.fetch("name")
+  stylist_id = params.fetch("stylist_id").to_i()
+  @mumu = Stylist.find(stylist_id)
+  @client = Client.new({:name => name, :stylist_id => stylist_id})
+  @client.save()
+  erb(:stylist_success) #issue here where if i dont go to success I get an error. Ask instructor!!
 end
 
 get("/stylists") do
@@ -33,3 +42,16 @@ get("/clients") do
   @clients = Client.all()
   erb(:clients)
 end
+
+get("/stylists/:id") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  @stylists = Stylist.all()
+  erb(:stylist)
+end
+
+delete("/deletes/:id") do
+    stylist = Stylist.find(params.fetch("id").to_i())
+    stylist.delete()
+    @stylists = Stylist.all()
+    erb(:stylist)
+  end
