@@ -18,6 +18,13 @@ define_singleton_method(:all) do #see stylist.rb for explanation
   clients
 end
 
+define_method(:==) do |another_client|
+  self.name().==(another_client.name()).&(self.stylist_id().==(another_client.stylist_id()))
+end
+
+define_method(:save) do
+  DB.exec("INSERT INTO client (name, stylist_id) VALUES ('#{name}', #{stylist_id});") ##{} is called string interpolation and makes it easier to insert variables into a string.
+end
 
 
 
