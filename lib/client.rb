@@ -24,7 +24,7 @@ end
 
 define_method(:save) do
   DB.exec("INSERT INTO client (name, stylist_id) VALUES ('#{name}', #{stylist_id});") ##{} is called string interpolation and makes it easier to insert variables into a string.
-end
+end #we didn't include ' ' around the #{} string interpolation of stylist_id because we want that attribute to go into the database as a fixnum.
 
 
 
