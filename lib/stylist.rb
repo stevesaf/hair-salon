@@ -53,6 +53,11 @@ define_method(:delete) do #We need to make sure it deletes the stylist and any c
     DB.exec("DELETE FROM client WHERE stylist_id = #{self.id()};")
 end
 
+define_method(:update) do |attributes|
+  @name = attributes.fetch(:name)
+  @id = self.id()
+  DB.exec("UPDATE stylist SET name = '#{name}' WHERE id = #{id};")
+end
 
 
 

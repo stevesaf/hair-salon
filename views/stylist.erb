@@ -1,5 +1,14 @@
 <h1><%= @stylist.name() %></h1>
 
+<form action="/stylists/<%= @stylist.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch"> <!-- this line will allow us to use the route patch("stylists/:id") in our app.rb file to update that particular list's resource.-->
+
+  <label for="name">Rename this stylist:</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit">Update</button>
+</form>
+
 <% if @stylist.clients().any?() %>
   <h3>Here are all the clients this stylist has:</h3>
 
