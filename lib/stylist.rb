@@ -48,7 +48,7 @@ define_method(:clients) do
   stylist_clients
 end
 
-define_method(:delete) do
+define_method(:delete) do #We need to make sure it deletes the stylist and any clients associated with them.
     DB.exec("DELETE FROM stylist WHERE id = #{self.id()};")
     DB.exec("DELETE FROM client WHERE stylist_id = #{self.id()};")
 end

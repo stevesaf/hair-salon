@@ -9,9 +9,10 @@
                   <a href="/stylists/<%= stylist.id() %>"><%= stylist.name %></a>
                 </li>
 
-                <form style="display: inline-block" action="/deletes/<%= stylist.id() %>">
+                <form style="display: inline-block" action="/stylists/<%= stylist.id() %>" method="post"> <!--need to add a post method here because delete is only accessible via post.-->
+                    <input name="_method" type="hidden" value="delete"> <!--#we need to add this line to items like delete/update to compliment the "post" method above.-->
                     <button class="btn btn-danger btn-cons center-block">
-                        delete
+                        Don't delete me, bro!
                     </button>
                 </form>
             </div>
